@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://editor.p5js.org/theultimateminecraftmaster/present/v3njytcMU -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="./v3njytcMU_files/p5.js.download"></script>
+    <script src="./v3njytcMU_files/p5.sound.min.js.download"></script>
+    <script src="./v3njytcMU_files/94901076-c5bf-4590-8652-4f43acc84c1f.js.download"></script>
+    
+    
+
+  <!--<base href="https://editor.p5js.org/theultimateminecraftmaster/present/v3njytcMU/">--><base href="."><style>
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+</style></head>
+  <body>
+    <script>var bananaImage,obstacleImage,obstacleGroup,background1,score,monkey_running,backgroundImage,ground;
+
+function preload(){
+  monkey_running = loadAnimation("https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/df9f0cc7-ca62-4762-be3d-bb5a882e9362.png","https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/f1ccc0e1-285b-4a64-bc7d-1f8444236a60.png","https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/9d12fd90-e5ba-4741-9b22-6307a8149ce8.png","https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/3fac13a1-5e20-4c20-8cea-454691621f15.png","https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/5bed5649-9ff7-4ce5-ac84-6792178838a4.png","https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/cd926200-656c-4143-8699-7f6648b71fb4.png","https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/e60c90aa-9448-41dc-b75a-2d484be04c82.png","https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/bb35cbf2-ad84-4f47-92f0-16affa45c932.png","https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/803de431-a3af-4a1b-ba27-44457b0f17ca.png","https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/ea259e61-1479-417a-9a7a-470f7643de4d.png");
+  backgroundImage = loadImage("https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/d3a36ae0-8f29-4832-98e8-cc09e2270cb5.jpg");
+  
+  bananaImage = loadImage("https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/b99ae820-24e2-4101-8bb1-3265b3f59bf3.png");
+  obstacleImage = loadImage("https://assets.editor.p5js.org/5fc3dfce3fd6a100244a164c/d7932565-3f05-45c6-ab22-602225ce31b3.png");
+}
+
+function setup() {
+  createCanvas(400, 400);
+  background1 = createSprite(200,200,400,400);
+  background1.addImage("background",backgroundImage);
+  background1.x = background1.width/2;
+  background1.velocityX = -5;
+  
+  monkey = createSprite(50,360,20,20);
+  monkey.addAnimation("monkey",monkey_running);
+  monkey.scale = 0.05;
+  
+  ground = createSprite(200,380,1000,10);
+  ground.visible = false;
+  
+  foodGroup = new Group();
+  obstacleGroup = new Group();
+  
+  score = 0;
+}
+
+function draw() {
+  background(220);
+  
+  if(background1.x < 0){
+    background1.x = background1.width/2;
+  }
+  monkey.collide(ground);
+  monkey.velocityY = monkey.velocityY +0.8;
+  if(keyDown("space")){
+    monkey.velocityY = monkey.velocityY - 2;
+  }
+  if(foodGroup.isTouching(monkey)){
+    foodGroup.destroyEach();
+    score = score+2;
+  }
+  if(obstacleGroup.isTouching(monkey)){
+    obstacleGroup.destroyEach();
+    monkey.scale = 0.05;
+  }
+  drawSprites();
+  stroke("white");
+  textSize(20);
+  fill("white");
+  text("Score : "+score,100,50)
+  
+  switch(score){
+    case 10:monkey.scale = 0.1;
+    break;
+    case 20:monkey.scale = 0.15;
+      break;
+      case 30:monkey.scale = 0.2;
+      break;
+      case 40:monkey.scale = 0.25;
+      break
+      case 50:monkey.scale = 0.3;
+      break;
+    default:break;
+  }
+}</script>
+  
+
+<main><canvas id="defaultCanvas0" class="p5Canvas" width="400" height="400" style="width: 400px; height: 400px;"></canvas></main></body></html>
